@@ -295,10 +295,13 @@ ON CONFLICT (day_of_week) DO UPDATE SET
 -- Categorias do Cardápio
 INSERT INTO public.categories (id, name, slug, order_index, is_active)
 VALUES
-    ('cat-salgadas', 'Sabores Salgados', 'sabores-salgados', 1, true),
-    ('cat-premium', 'Linha Premium (Cream Cheese)', 'linha-premium', 2, true),
-    ('cat-doces', 'Sobremesas', 'sobremesas', 3, true),
-    ('cat-bebidas', 'Bebidas', 'bebidas', 4, true)
+    ('cat-especiais', 'Especiais', 'especiais', 1, true),
+    ('cat-cariocas', 'Cariocas', 'cariocas', 2, true),
+    ('cat-hossomakis', 'Hossomakis', 'hossomakis', 3, true),
+    ('cat-uramakis', 'Uramakis', 'uramakis', 4, true),
+    ('cat-temakis', 'Temakis', 'temakis', 5, true),
+    ('cat-combos', 'Combos', 'combos', 6, true),
+    ('cat-bebidas', 'Bebidas', 'bebidas', 7, true)
 ON CONFLICT (id) DO UPDATE SET
     name = EXCLUDED.name,
     slug = EXCLUDED.slug,
@@ -307,35 +310,35 @@ ON CONFLICT (id) DO UPDATE SET
 -- Adicionais
 INSERT INTO public.optionals (id, name, price, is_active, order_index)
 VALUES
-    ('opt-cream-cheese', 'Adicional Cream Cheese', 5.00, true, 1),
-    ('opt-cheddar', 'Adicional Cheddar', 4.00, true, 2),
-    ('opt-bacon', 'Adicional Bacon Crocante', 4.00, true, 3),
-    ('opt-queijo', 'Adicional Mussarela', 4.00, true, 4),
-    ('opt-ovo', 'Adicional Ovo Cozido', 2.00, true, 5)
+    ('opt-shoyu', 'Shoyu', 2.00, true, 1),
+    ('opt-teriaki', 'Teriaki', 2.00, true, 2),
+    ('opt-wasabi', 'Wasabi', 2.00, true, 3),
+    ('opt-gengibre', 'Gengibre', 2.00, true, 4),
+    ('opt-cream-cheese', 'Cream Cheese', 3.00, true, 5)
 ON CONFLICT (id) DO UPDATE SET
     name = EXCLUDED.name,
     price = EXCLUDED.price;
 
--- Bairros e Taxas
+-- Bairros e Taxas de Entrega
 INSERT INTO public.neighborhoods (id, name, delivery_fee, is_active, order_index)
 VALUES
     ('bairro-1', 'Alphaville', 15.00, true, 1),
-    ('bairro-2', 'Alto da Fábrica', 6.00, true, 2),
+    ('bairro-2', 'Alto da Fabrica', 6.00, true, 2),
     ('bairro-3', 'Alto do Vento', 15.00, true, 3),
-    ('bairro-4', 'Bulhões', 6.00, true, 4),
+    ('bairro-4', 'Bulhoes', 6.00, true, 4),
     ('bairro-5', 'Cascata', 7.00, true, 5),
     ('bairro-6', 'Coqueiral', 20.00, true, 6),
-    ('bairro-7', 'Cavaleiro (Antes da Estação)', 15.00, true, 7),
+    ('bairro-7', 'Cavaleiro (Antes da Estacao)', 15.00, true, 7),
     ('bairro-8', 'Cavaleiro (Bairros)', 20.00, true, 8),
     ('bairro-9', 'Curado 1 / 2 / 3 / 4', 20.00, true, 9),
-    ('bairro-10', 'Dois Carneiros (Até Fund. Bradesco / Yapoatam)', 15.00, true, 10),
-    ('bairro-11', 'Dois Carneiros (Após Fund. Bradesco)', 20.00, true, 11),
+    ('bairro-10', 'Dois Carneiros (Ate Fund. Bradesco / Yapoatam)', 15.00, true, 10),
+    ('bairro-11', 'Dois Carneiros (Apos Fund. Bradesco)', 20.00, true, 11),
     ('bairro-12', 'Engenho Velho', 7.00, true, 12),
     ('bairro-13', 'Floriano', 10.00, true, 13),
     ('bairro-14', 'Lote 56 (Terminal)', 7.00, true, 14),
     ('bairro-15', 'Lote 56 (Casinhas)', 10.00, true, 15),
     ('bairro-16', 'Lote 92', 7.00, true, 16),
-    ('bairro-17', 'Lote 92 (Colônia dos Padres)', 8.00, true, 17),
+    ('bairro-17', 'Lote 92 (Colonia dos Padres)', 8.00, true, 17),
     ('bairro-18', 'Tenda', 6.00, true, 18),
     ('bairro-19', 'Malvinas', 7.00, true, 19),
     ('bairro-20', 'Marcos Freire', 20.00, true, 20),
@@ -343,17 +346,17 @@ VALUES
     ('bairro-22', 'Moenda', 6.00, true, 22),
     ('bairro-23', 'Muribeca', 20.00, true, 23),
     ('bairro-24', 'Zumbi do Pacheco', 20.00, true, 24),
-    ('bairro-25', 'UR''s / Ibura', 20.00, true, 25),
+    ('bairro-25', 'URs / Ibura', 20.00, true, 25),
     ('bairro-26', 'Pacheco', 20.00, true, 26),
     ('bairro-27', 'Padre Roma', 7.00, true, 27),
     ('bairro-28', 'Quadro', 7.00, true, 28),
     ('bairro-29', 'Vila Natal (Na Portaria)', 7.00, true, 29),
     ('bairro-30', 'Vila Natal (No Apartamento)', 10.00, true, 30),
-    ('bairro-31', 'Vila Natal (Condomínio sem entrada de moto)', 12.00, true, 31),
+    ('bairro-31', 'Vila Natal (Condominio sem entrada de moto)', 12.00, true, 31),
     ('bairro-32', 'Retiro', 12.00, true, 32),
     ('bairro-33', 'Sancho', 20.00, true, 33),
     ('bairro-34', 'Santo Aleixo', 7.00, true, 34),
-    ('bairro-35', 'Santo Aleixo (Após Nazareno)', 9.00, true, 35),
+    ('bairro-35', 'Santo Aleixo (Apos Nazareno)', 9.00, true, 35),
     ('bairro-36', 'Socorro (Antes da Granja)', 8.00, true, 36),
     ('bairro-37', 'Socorro (Entrada da Granja)', 10.00, true, 37),
     ('bairro-38', 'Suassuna (Portaria)', 10.00, true, 38),
@@ -362,7 +365,7 @@ VALUES
     ('bairro-41', 'Vila Piedade', 10.00, true, 41),
     ('bairro-42', 'Vila Rica', 6.00, true, 42),
     ('bairro-43', 'Vila Rica (Porta do Apt das Cohab)', 8.00, true, 43),
-    ('bairro-44', 'Santo Antônio (Terminal / Cachimbinho)', 6.00, true, 44),
+    ('bairro-44', 'Santo Antonio (Terminal / Cachimbinho)', 6.00, true, 44),
     ('bairro-45', 'Vista Alegre', 6.00, true, 45),
     ('bairro-46', 'Batoreu', 6.00, true, 46),
     ('bairro-47', 'Gruta do Amor', 9.00, true, 47),
@@ -371,7 +374,7 @@ VALUES
     ('bairro-50', 'Areias', 25.00, true, 50),
     ('bairro-51', 'San Martin', 25.00, true, 51),
     ('bairro-52', 'Ipsep', 25.00, true, 52),
-    ('bairro-53', 'Várzea', 30.00, true, 53),
+    ('bairro-53', 'Varzea', 30.00, true, 53),
     ('bairro-54', 'Imbiribeira', 25.00, true, 54),
     ('bairro-55', 'Centro do Recife', 35.00, true, 55),
     ('bairro-56', 'Afogados', 30.00, true, 56),
@@ -393,44 +396,51 @@ ON CONFLICT (id) DO NOTHING;
 -- Produtos / Cardápio Mago Sushi
 INSERT INTO public.products (id, category_id, name, description, price, price_p, price_m, price_g, has_sizes, sizes, image_url, is_promo, is_active, is_available, order_index)
 VALUES
-    -- Sabores Salgados
-    ('prod-mussarela', 'cat-salgadas', 'Mussarela', 'Queijo mussarela, requeijão e tomate.', 25.00, 25.00, 34.00, 44.00, true, '[{"size_key":"P","name":"P (Pequena)","price":25.00},{"size_key":"M","name":"M (Média)","price":34.00},{"size_key":"G","name":"G (Grande)","price":44.00}]'::jsonb, 'logo.jpg', false, true, true, 1),
-    ('prod-calabresa', 'cat-salgadas', 'Calabresa', 'Calabresa, mussarela, requeijão e cebola.', 25.00, 25.00, 35.00, 45.00, true, '[{"size_key":"P","name":"P (Pequena)","price":25.00},{"size_key":"M","name":"M (Média)","price":35.00},{"size_key":"G","name":"G (Grande)","price":45.00}]'::jsonb, 'logo.jpg', false, true, true, 2),
-    ('prod-frango', 'cat-salgadas', 'Frango', 'Mussarela, requeijão, frango e milho.', 25.00, 25.00, 35.00, 45.00, true, '[{"size_key":"P","name":"P (Pequena)","price":25.00},{"size_key":"M","name":"M (Média)","price":35.00},{"size_key":"G","name":"G (Grande)","price":45.00}]'::jsonb, 'logo.jpg', false, true, true, 3),
-    ('prod-portuguesa', 'cat-salgadas', 'Portuguesa', 'Mussarela, requeijão, presunto, bacon, ovo, cebola, ervilha e azeitona.', 29.00, 29.00, 38.00, 48.00, true, '[{"size_key":"P","name":"P (Pequena)","price":29.00},{"size_key":"M","name":"M (Média)","price":38.00},{"size_key":"G","name":"G (Grande)","price":48.00}]'::jsonb, 'logo.jpg', false, true, true, 4),
-    ('prod-charque', 'cat-salgadas', 'Charque', 'Mussarela, requeijão, charque e cebola.', 30.00, 30.00, 39.00, 49.00, true, '[{"size_key":"P","name":"P (Pequena)","price":30.00},{"size_key":"M","name":"M (Média)","price":39.00},{"size_key":"G","name":"G (Grande)","price":49.00}]'::jsonb, 'logo.jpg', false, true, true, 5),
-    ('prod-frango-bacon', 'cat-salgadas', 'Frango com Bacon', 'Mussarela, requeijão, frango e bacon.', 28.00, 28.00, 37.00, 47.00, true, '[{"size_key":"P","name":"P (Pequena)","price":28.00},{"size_key":"M","name":"M (Média)","price":37.00},{"size_key":"G","name":"G (Grande)","price":47.00}]'::jsonb, 'logo.jpg', false, true, true, 6),
-    ('prod-camarao', 'cat-salgadas', 'Camarão', 'Mussarela, requeijão, camarão e tomate.', 30.00, 30.00, 40.00, 50.00, true, '[{"size_key":"P","name":"P (Pequena)","price":30.00},{"size_key":"M","name":"M (Média)","price":40.00},{"size_key":"G","name":"G (Grande)","price":50.00}]'::jsonb, 'logo.jpg', false, true, true, 7),
-    ('prod-frango-cheddar', 'cat-salgadas', 'Frango com Cheddar', 'Mussarela, requeijão, frango e cheddar.', 27.00, 27.00, 37.00, 47.00, true, '[{"size_key":"P","name":"P (Pequena)","price":27.00},{"size_key":"M","name":"M (Média)","price":37.00},{"size_key":"G","name":"G (Grande)","price":47.00}]'::jsonb, 'logo.jpg', false, true, true, 8),
-    ('prod-quatro-queijos', 'cat-salgadas', 'Quatro Queijos', 'Mussarela, requeijão, cheddar e coalho.', 28.00, 28.00, 37.00, 47.00, true, '[{"size_key":"P","name":"P (Pequena)","price":28.00},{"size_key":"M","name":"M (Média)","price":37.00},{"size_key":"G","name":"G (Grande)","price":47.00}]'::jsonb, 'logo.jpg', false, true, true, 9),
-    ('prod-file-alcatra', 'cat-salgadas', 'Filé de Alcatra', 'Mussarela, requeijão, cubos de alcatra e cebola.', 33.00, 33.00, 42.00, 52.00, true, '[{"size_key":"P","name":"P (Pequena)","price":33.00},{"size_key":"M","name":"M (Média)","price":42.00},{"size_key":"G","name":"G (Grande)","price":52.00}]'::jsonb, 'logo.jpg', false, true, true, 10),
-    ('prod-calabresa-cheddar', 'cat-salgadas', 'Calabresa com Cheddar', 'Mussarela, calabresa, cheddar e cebola.', 26.00, 26.00, 36.00, 46.00, true, '[{"size_key":"P","name":"P (Pequena)","price":26.00},{"size_key":"M","name":"M (Média)","price":36.00},{"size_key":"G","name":"G (Grande)","price":46.00}]'::jsonb, 'logo.jpg', false, true, true, 11),
-    ('prod-lombo-canadense', 'cat-salgadas', 'Lombo Canadense', 'Mussarela, requeijão, lombo e tomate.', 30.00, 30.00, 39.00, 49.00, true, '[{"size_key":"P","name":"P (Pequena)","price":30.00},{"size_key":"M","name":"M (Média)","price":39.00},{"size_key":"G","name":"G (Grande)","price":49.00}]'::jsonb, 'logo.jpg', false, true, true, 12),
-    ('prod-baiana', 'cat-salgadas', 'Baiana', 'Mussarela, requeijão, calabresa, ovo cozido e cebola.', 27.00, 27.00, 37.00, 47.00, true, '[{"size_key":"P","name":"P (Pequena)","price":27.00},{"size_key":"M","name":"M (Média)","price":37.00},{"size_key":"G","name":"G (Grande)","price":47.00}]'::jsonb, 'logo.jpg', false, true, true, 13),
-
-    -- Linha Premium (Cream Cheese)
-    ('prod-camarao-cc', 'cat-premium', 'Camarão com Cream Cheese', 'Mussarela, camarão, tomate e Cream Cheese especial.', 35.00, 35.00, 45.00, 55.00, true, '[{"size_key":"P","name":"P (Pequena)","price":35.00},{"size_key":"M","name":"M (Média)","price":45.00},{"size_key":"G","name":"G (Grande)","price":55.00}]'::jsonb, 'logo.jpg', false, true, true, 1),
-    ('prod-maminha-cc', 'cat-premium', 'Maminha com Cream Cheese', 'Mussarela, maminha desfiada selecionada, cebola e Cream Cheese.', 36.00, 36.00, 46.00, 56.00, true, '[{"size_key":"P","name":"P (Pequena)","price":36.00},{"size_key":"M","name":"M (Média)","price":46.00},{"size_key":"G","name":"G (Grande)","price":56.00}]'::jsonb, 'logo.jpg', false, true, true, 2),
-
-    -- Sobremesas / Doces
-    ('prod-nutella', 'cat-doces', 'Nutella', 'Mussarela e Nutella pura com granulado.', 32.00, 32.00, 41.00, 51.00, true, '[{"size_key":"P","name":"P (Pequena)","price":32.00},{"size_key":"M","name":"M (Média)","price":41.00},{"size_key":"G","name":"G (Grande)","price":51.00}]'::jsonb, 'logo.jpg', false, true, true, 1),
-    ('prod-romeu-julieta', 'cat-doces', 'Romeu e Julieta', 'Mussarela especial com deliciosa goiabada cremosa.', 25.00, 25.00, 35.00, 45.00, true, '[{"size_key":"P","name":"P (Pequena)","price":25.00},{"size_key":"M","name":"M (Média)","price":35.00},{"size_key":"G","name":"G (Grande)","price":45.00}]'::jsonb, 'logo.jpg', false, true, true, 2),
-
-    -- Bebidas
-    ('prod-coca-2l', 'cat-bebidas', 'Coca-Cola 2 Litros', 'Refrigerante Coca-Cola garrafa 2L bem gelada.', 14.00, 14.00, 0, 0, false, '[]'::jsonb, 'logo.jpg', false, true, true, 1),
-    ('prod-guarana-2l', 'cat-bebidas', 'Guaraná Antarctica 2 Litros', 'Refrigerante Guaraná Antarctica garrafa 2L bem gelada.', 12.00, 12.00, 0, 0, false, '[]'::jsonb, 'logo.jpg', false, true, true, 2),
-    ('prod-coca-lata', 'cat-bebidas', 'Coca-Cola Lata 350ml', 'Refrigerante Coca-Cola lata 350ml gelada.', 6.00, 6.00, 0, 0, false, '[]'::jsonb, 'logo.jpg', false, true, true, 3),
-    ('prod-guarana-lata', 'cat-bebidas', 'Guaraná Antarctica Lata 350ml', 'Refrigerante Guaraná Antarctica lata 350ml gelada.', 6.00, 6.00, 0, 0, false, '[]'::jsonb, 'logo.jpg', false, true, true, 4),
-    ('prod-agua', 'cat-bebidas', 'Água Mineral sem Gás 500ml', 'Garrafa de água mineral 500ml natural ou gelada.', 4.00, 4.00, 0, 0, false, '[]'::jsonb, 'logo.jpg', false, true, true, 5)
+    ('prod-sunomono-trad', 'cat-especiais', 'Sunomono Tradicional (300g)', 'Salada de Pepino agridoce, salmao e kani.', 25.00, 25.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 1),
+    ('prod-sunomono-esp', 'cat-especiais', 'Sunomono Especial (300g)', 'Salada de Pepino agridoce, salmao, camarao e kani.', 28.00, 28.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 2),
+    ('prod-big-hot', 'cat-especiais', 'Big Hot', 'Enrolado de arroz empanado e frito recheado de salmao, camarao e cream cheese.', 25.00, 25.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 3),
+    ('prod-sushi-burger-misto', 'cat-especiais', 'Sushi Burger Misto', 'Arroz empanado e frito com recheio salmao, camarao, kani e cream cheese.', 28.00, 28.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 4),
+    ('prod-sushi-burger-salmon', 'cat-especiais', 'Sushi Burger Salmao', 'Arroz empanado e frito com recheio de salmao e cream cheese.', 30.00, 30.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 5),
+    ('prod-rolinho-romeu', 'cat-especiais', 'Rolinho Romeu e Julieta (dupla)', 'Massa de harumaki, queijo e goiabada frito.', 16.00, 16.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 6),
+    ('prod-carioca-salmon', 'cat-cariocas', 'Carioca de Salmao (10 und.)', 'Enrolado de arroz, salmao e cream cheese empanado e frito.', 25.00, 25.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 1),
+    ('prod-carioca-camarao', 'cat-cariocas', 'Carioca de Camarao (10 und.)', 'Enrolado de arroz, camarao cozido, cream cheese empanado e frito.', 24.00, 24.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 2),
+    ('prod-carioca-camarao-crocante', 'cat-cariocas', 'Carioca de Camarao Crocante (10 und.)', 'Enrolado de arroz, camarao empanado, cream cheese empanado e frito.', 23.00, 23.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 3),
+    ('prod-carioca-kani', 'cat-cariocas', 'Carioca de Kani (10 und.)', 'Enrolado de arroz, kani, cream cheese empanado e frito.', 20.00, 20.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 4),
+    ('prod-hosso-salmon', 'cat-hossomakis', 'Hossomaki de Salmao (10 und.)', 'Enrolado de alga por fora e arroz com recheio de salmao.', 25.00, 25.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 1),
+    ('prod-hosso-camarao', 'cat-hossomakis', 'Hossomaki de Camarao (10 und.)', 'Enrolado de alga por fora e arroz com recheio de camarao.', 25.00, 25.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 2),
+    ('prod-hosso-kani', 'cat-hossomakis', 'Hossomaki de Kani (10 und.)', 'Enrolado de alga por fora e arroz com recheio de kani.', 25.00, 25.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 3),
+    ('prod-ura-salmon', 'cat-uramakis', 'Uramaki de Salmao (10 und.)', 'Enrolado de arroz c/ gergelim, salmao e cream cheese.', 25.00, 25.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 1),
+    ('prod-ura-camarao', 'cat-uramakis', 'Uramaki de Camarao (10 und.)', 'Enrolado de arroz c/ gergelim, camarao cozido e cream cheese.', 23.00, 23.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 2),
+    ('prod-ura-camarao-emp', 'cat-uramakis', 'Uramaki de Camarao Empanado (10 und.)', 'Enrolado de arroz c/ gergelim, camarao empanado e cream cheese.', 22.00, 22.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 3),
+    ('prod-ura-kani', 'cat-uramakis', 'Uramaki de Kani (10 und.)', 'Enrolado de arroz c/ gergelim, Kani e cream cheese.', 20.00, 20.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 4),
+    ('prod-ura-skin', 'cat-uramakis', 'Uramaki de Skin (10 und.)', 'Enrolado de arroz c/ gergelim, Pele de Salmao frita e cream cheese.', 14.00, 14.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 5),
+    ('prod-ura-salmon-esp', 'cat-uramakis', 'Uramaki de Salmao Especial (10 und.)', 'Enrolado de arroz c/ gergelim, salmao, cream cheese e lamina de Salmao macaricado por cima.', 28.00, 28.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 6),
+    ('prod-ura-camarao-esp', 'cat-uramakis', 'Uramaki de Camarao Especial (10 und.)', 'Enrolado de arroz c/ gergelim, camarao empanado, cream cheese e lamina de salmao macaricado por cima.', 27.00, 27.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 7),
+    ('prod-temaki-salmon-nat', 'cat-temakis', 'Temaki de Salmao Natural', 'Arroz, salmao, cream cheese e cebolinha.', 26.00, 26.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 1),
+    ('prod-temaki-camarao-nat', 'cat-temakis', 'Temaki de Camarao Natural', 'Arroz, camarao cozido, cream cheese e cebolinha.', 23.00, 23.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 2),
+    ('prod-temaki-camarao-emp', 'cat-temakis', 'Temaki de Camarao Empanado', 'Arroz, camarao empanado, cream cheese e cebolinha.', 24.00, 24.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 3),
+    ('prod-temaki-kani', 'cat-temakis', 'Temaki de Kani', 'Arroz, Kani, cream cheese e cebolinha.', 18.00, 18.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 4),
+    ('prod-temaki-skin', 'cat-temakis', 'Temaki de Skin', 'Arroz, Pele de Salmao frita, cream cheese e cebolinha.', 14.00, 14.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 5),
+    ('prod-temaki-misto', 'cat-temakis', 'Temaki Misto', 'Arroz, Salmao, camarao, Kani, cream cheese e cebolinha.', 24.00, 24.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 6),
+    ('prod-temaki-hot-salmon', 'cat-temakis', 'Temaki Hot Salmao', 'Arroz, Salmao, cream cheese e cebolinha. Frito.', 25.00, 25.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 7),
+    ('prod-temaki-hot-camarao', 'cat-temakis', 'Temaki Hot Camarao', 'Arroz, camarao cozido, cream cheese e cebolinha. Frito.', 24.00, 24.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 8),
+    ('prod-temaki-supremo-misto', 'cat-temakis', 'Temaki Supremo Fire Misto 500g', 'Arroz, salmao, camarao e Kani empanados, cream cheese e cebolinha com Manta de salmao macaricado por cima.', 59.90, 59.90, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 9),
+    ('prod-temaki-supremo-camarao', 'cat-temakis', 'Temaki Supremo Fire de Camarao 500g', 'Arroz, camarao empanado, cream cheese e cebolinha com Manta de salmao macaricado por cima.', 59.90, 59.90, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 10),
+    ('prod-combo-1', 'cat-combos', 'COMBO 1 (15 pecas)', '5 Niguiri de salmao + 5 Kani queijo + 5 uramaki especial de camarao empanado.', 34.90, 34.90, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 1),
+    ('prod-combo-2', 'cat-combos', 'COMBO 2 (1 temaki + 20 pecas)', '10 cariocas salmao e camarao + 10 hot roll salmao e kani + 1 temaki misto frito.', 49.90, 49.90, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 2),
+    ('prod-combo-3', 'cat-combos', 'COMBO 3 (2 temakis + 30 pecas)', '10 cariocas misto + 10 Hossomaki misto + 10 uramaki misto + 2 temaki misto natural.', 69.90, 69.90, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 3),
+    ('prod-combo-4', 'cat-combos', 'COMBO 4 (40 pecas)', '10 uramakis salmao e camarao + 10 canapes salmao e camarao + 10 cariocas de salmao e camarao + 10 hot roll salmao e camarao.', 59.90, 59.90, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 4),
+    ('prod-combo-5', 'cat-combos', 'COMBO 5 (50 pecas)', '20 uramakis misto + 10 Hossomakis misto + 10 cariocas de salmao + 10 Niguiri misto.', 69.90, 69.90, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 5),
+    ('prod-barca-especial', 'cat-combos', 'Barca Especial (35 pecas)', '10 uramaki de salmao e camarao + 10 cariocas de salmao e camarao + 6 Niguiri salmao e kani + 4 kani queijo + 3 joy joy + 2 ebi joy.', 65.90, 65.90, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 6),
+    ('prod-coca-lata', 'cat-bebidas', 'Coca-Cola Lata 350ml', 'Refrigerante Coca-Cola lata 350ml gelada.', 7.00, 7.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 1),
+    ('prod-coca-zero-lata', 'cat-bebidas', 'Coca-Cola Zero Lata 350ml', 'Refrigerante Coca-Cola Zero lata 350ml gelada.', 7.00, 7.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 2),
+    ('prod-guarana-lata', 'cat-bebidas', 'Guarana Antarctica Lata 350ml', 'Refrigerante Guarana Antarctica lata 350ml gelada.', 6.00, 6.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 3),
+    ('prod-h2o-limoneto', 'cat-bebidas', 'H2O Limoneto 500ml', 'Agua saborizada H2O Limoneto 500ml.', 8.00, 8.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 4),
+    ('prod-guarana-1l', 'cat-bebidas', 'Guarana Antarctica 1L Pet', 'Refrigerante Guarana Antarctica garrafa 1L.', 10.00, 10.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 5),
+    ('prod-coca-1l', 'cat-bebidas', 'Coca-Cola 1L Pet', 'Refrigerante Coca-Cola garrafa 1L.', 12.00, 12.00, 0.00, 0.00, false, '[]'::jsonb, 'logo.jpg', false, true, true, 6)
 ON CONFLICT (id) DO UPDATE SET
     name = EXCLUDED.name,
     description = EXCLUDED.description,
     price = EXCLUDED.price,
-    price_p = EXCLUDED.price_p,
-    price_m = EXCLUDED.price_m,
-    price_g = EXCLUDED.price_g,
-    has_sizes = EXCLUDED.has_sizes,
-    sizes = EXCLUDED.sizes,
     image_url = EXCLUDED.image_url,
     category_id = EXCLUDED.category_id;
-
