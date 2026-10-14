@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS public.settings (
     min_order_value NUMERIC(10,2) DEFAULT 20.00,
     store_status_mode TEXT DEFAULT 'auto',
     closed_message TEXT DEFAULT 'Estamos fechados no momento. Horário: Quarta a Segunda das 17:30 às 23:00 (Terça-feira fechado). Sábado e Domingo almoço das 11:00 às 15:00 e jantar das 17:30 às 23:00.',
-    admin_password_hash TEXT DEFAULT 'chomelhor',
+    admin_password_hash TEXT DEFAULT 'melhorsushidobrasil',
     pix_key TEXT DEFAULT '5581991421295',
     pix_type TEXT DEFAULT 'Telefone',
     pix_beneficiary TEXT DEFAULT 'Mago Sushi',
@@ -266,7 +266,7 @@ VALUES (
     20.00,
     'auto',
     'Estamos fechados no momento. Horário: Quarta a Segunda das 17:30 às 23:00 (Terça-feira fechado). Sábado e Domingo almoço das 11:00 às 15:00 e jantar das 17:30 às 23:00.',
-    'chomelhor',
+    'melhorsushidobrasil',
     '5581991421295',
     'Telefone',
     'Mago Sushi'

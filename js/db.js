@@ -251,8 +251,8 @@
       } catch (e) {
         // Fallback local
         const settings = getStored(STORAGE_KEYS.SETTINGS, window.INITIAL_SETTINGS);
-        const expected = settings?.admin_password_hash || 'chomelhor';
-        return String(password).trim() === String(expected).trim() || String(password).trim() === 'chomelhor';
+        const expected = settings?.admin_password_hash || 'melhorsushidobrasil';
+        return String(password).trim() === String(expected).trim() || String(password).trim() === 'melhorsushidobrasil';
       }
     },
 

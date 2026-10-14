@@ -87,10 +87,10 @@
       }
 
       const settings = await window.db.getSettings();
-      const expectedPassword = settings?.admin_password_hash || 'chomelhor';
+      const expectedPassword = settings?.admin_password_hash || 'melhorsushidobrasil';
 
       const isValid = String(password).trim() === String(expectedPassword).trim() ||
-                      String(password).trim() === 'chomelhor';
+                      String(password).trim() === 'melhorsushidobrasil';
 
       if (isValid) {
         const adminSession = {

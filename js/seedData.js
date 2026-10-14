@@ -13,7 +13,7 @@ const INITIAL_SETTINGS = {
   min_order_value: 20.00,
   store_status_mode: "auto",
   closed_message: "Estamos fechados no momento. Horário: Quarta a Segunda das 17:30 às 23:00 (Terça-feira fechado). Sábado e Domingo almoço das 11:00 às 15:00 e jantar das 17:30 às 23:00.",
-  admin_password_hash: "magosushi",
+  admin_password_hash: "melhorsushidobrasil",
   pix_key: "5581991421295",
   pix_type: "Telefone",
   pix_beneficiary: "Mago Sushi"
