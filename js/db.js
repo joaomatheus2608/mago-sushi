@@ -18,7 +18,7 @@
     NEIGHBORHOODS: 'magosushi_neighborhoods',
     COURIERS: 'magosushi_couriers',
     CASH_CLOSINGS: 'magosushi_cash_closings',
-    DATA_VERSION: 'magosushi_version_v4_0'
+    DATA_VERSION: 'magosushi_version_v4_1'
   };
 
   // ----------------------------------------
@@ -78,14 +78,14 @@
   // ----------------------------------------
   function initDefaults() {
     const currentVersion = localStorage.getItem(STORAGE_KEYS.DATA_VERSION);
-    if (currentVersion !== 'v4.0') {
+    if (currentVersion !== 'v4.1') {
       setStored(STORAGE_KEYS.NEIGHBORHOODS, window.INITIAL_NEIGHBORHOODS || []);
       setStored(STORAGE_KEYS.CATEGORIES, window.INITIAL_CATEGORIES || []);
       setStored(STORAGE_KEYS.PRODUCTS, window.INITIAL_PRODUCTS || []);
       setStored(STORAGE_KEYS.OPTIONALS, window.INITIAL_OPTIONALS || []);
       setStored(STORAGE_KEYS.HOURS, window.INITIAL_OPERATING_HOURS || []);
       localStorage.removeItem(STORAGE_KEYS.SETTINGS);
-      localStorage.setItem(STORAGE_KEYS.DATA_VERSION, 'v4.0');
+      localStorage.setItem(STORAGE_KEYS.DATA_VERSION, 'v4.1');
     }
 
     const checkArrayOrFill = (key, initial) => {

@@ -1,4 +1,4 @@
-﻿// ========================================================
+// ========================================================
 // MAGO SUSHI - DADOS OFICIAIS DO CARDAPIO & SISTEMA
 // ========================================================
 
@@ -12,7 +12,7 @@ const INITIAL_SETTINGS = {
   delivery_fee: 5.00,
   min_order_value: 20.00,
   store_status_mode: "auto",
-  closed_message: "Estamos fechados no momento. Nosso horario de funcionamento e de Quarta a Domingo, das 18:00 as 22:30 (Segunda e Terca fechado).",
+  closed_message: "Estamos fechados no momento. Horário: Quarta a Segunda das 17:30 às 23:00 (Terça-feira fechado). Sábado e Domingo almoço das 11:00 às 15:00 e jantar das 17:30 às 23:00.",
   admin_password_hash: "magosushi",
   pix_key: "5581991421295",
   pix_type: "Telefone",
@@ -20,13 +20,13 @@ const INITIAL_SETTINGS = {
 };
 
 const INITIAL_OPERATING_HOURS = [
-  { day_of_week: 0, day_name: "Domingo", open_time: "18:00", close_time: "22:30", is_open: true },
-  { day_of_week: 1, day_name: "Segunda-feira", open_time: "18:00", close_time: "22:30", is_open: false },
-  { day_of_week: 2, day_name: "Terca-feira", open_time: "18:00", close_time: "22:30", is_open: false },
-  { day_of_week: 3, day_name: "Quarta-feira", open_time: "18:00", close_time: "22:30", is_open: true },
-  { day_of_week: 4, day_name: "Quinta-feira", open_time: "18:00", close_time: "22:30", is_open: true },
-  { day_of_week: 5, day_name: "Sexta-feira", open_time: "18:00", close_time: "22:30", is_open: true },
-  { day_of_week: 6, day_name: "Sabado", open_time: "18:00", close_time: "22:30", is_open: true }
+  { day_of_week: 0, day_name: "Domingo", open_time: "11:00", close_time: "15:00", open_time2: "17:30", close_time2: "23:00", is_open: true },
+  { day_of_week: 1, day_name: "Segunda-feira", open_time: "17:30", close_time: "23:00", open_time2: null, close_time2: null, is_open: true },
+  { day_of_week: 2, day_name: "Terca-feira", open_time: "17:30", close_time: "23:00", open_time2: null, close_time2: null, is_open: false },
+  { day_of_week: 3, day_name: "Quarta-feira", open_time: "17:30", close_time: "23:00", open_time2: null, close_time2: null, is_open: true },
+  { day_of_week: 4, day_name: "Quinta-feira", open_time: "17:30", close_time: "23:00", open_time2: null, close_time2: null, is_open: true },
+  { day_of_week: 5, day_name: "Sexta-feira", open_time: "17:30", close_time: "23:00", open_time2: null, close_time2: null, is_open: true },
+  { day_of_week: 6, day_name: "Sabado", open_time: "11:00", close_time: "15:00", open_time2: "17:30", close_time2: "23:00", is_open: true }
 ];
 
 const INITIAL_CATEGORIES = [

@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS public.settings (
     delivery_fee NUMERIC(10,2) DEFAULT 5.00,
     min_order_value NUMERIC(10,2) DEFAULT 20.00,
     store_status_mode TEXT DEFAULT 'auto',
-    closed_message TEXT DEFAULT 'Estamos fechados no momento. Nosso horário de funcionamento é das 17:00 às 22:00 (Apenas Delivery).',
+    closed_message TEXT DEFAULT 'Estamos fechados no momento. Horário: Quarta a Segunda das 17:30 às 23:00 (Terça-feira fechado). Sábado e Domingo almoço das 11:00 às 15:00 e jantar das 17:30 às 23:00.',
     admin_password_hash TEXT DEFAULT 'chomelhor',
     pix_key TEXT DEFAULT '5581991421295',
     pix_type TEXT DEFAULT 'Telefone',
@@ -36,8 +36,10 @@ CREATE TABLE IF NOT EXISTS public.operating_hours (
     id SERIAL PRIMARY KEY,
     day_of_week INTEGER NOT NULL UNIQUE CHECK (day_of_week BETWEEN 0 AND 6),
     day_name TEXT NOT NULL,
-    open_time TEXT NOT NULL DEFAULT '18:00',
+    open_time TEXT NOT NULL DEFAULT '17:30',
     close_time TEXT NOT NULL DEFAULT '23:00',
+    open_time2 TEXT DEFAULT NULL,
+    close_time2 TEXT DEFAULT NULL,
     is_open BOOLEAN NOT NULL DEFAULT true
 );
 
@@ -263,7 +265,7 @@ VALUES (
     5.00,
     20.00,
     'auto',
-    'Estamos fechados no momento. Nosso horário de funcionamento é de Quarta a Domingo, das 17:00 às 22:00 (Segunda e Terça fechado).',
+    'Estamos fechados no momento. Horário: Quarta a Segunda das 17:30 às 23:00 (Terça-feira fechado). Sábado e Domingo almoço das 11:00 às 15:00 e jantar das 17:30 às 23:00.',
     'chomelhor',
     '5581991421295',
     'Telefone',
@@ -277,19 +279,21 @@ ON CONFLICT (id) DO UPDATE SET
     pix_key = EXCLUDED.pix_key,
     closed_message = EXCLUDED.closed_message;
 
--- Horários de Funcionamento (Quarta a Domingo, 17:00 às 22:00 | Segunda e Terça fechado)
-INSERT INTO public.operating_hours (day_of_week, day_name, open_time, close_time, is_open)
+-- Horários de Funcionamento (Quarta a Segunda, 17:30 às 23:00 | Terça fechado | Sáb e Dom almoço 11:00 às 15:00)
+INSERT INTO public.operating_hours (day_of_week, day_name, open_time, close_time, open_time2, close_time2, is_open)
 VALUES 
-    (0, 'Domingo', '17:00', '22:00', true),
-    (1, 'Segunda-feira', '17:00', '22:00', false),
-    (2, 'Terça-feira', '17:00', '22:00', false),
-    (3, 'Quarta-feira', '17:00', '22:00', true),
-    (4, 'Quinta-feira', '17:00', '22:00', true),
-    (5, 'Sexta-feira', '17:00', '22:00', true),
-    (6, 'Sábado', '17:00', '22:00', true)
+    (0, 'Domingo', '11:00', '15:00', '17:30', '23:00', true),
+    (1, 'Segunda-feira', '17:30', '23:00', NULL, NULL, true),
+    (2, 'Terça-feira', '17:30', '23:00', NULL, NULL, false),
+    (3, 'Quarta-feira', '17:30', '23:00', NULL, NULL, true),
+    (4, 'Quinta-feira', '17:30', '23:00', NULL, NULL, true),
+    (5, 'Sexta-feira', '17:30', '23:00', NULL, NULL, true),
+    (6, 'Sábado', '11:00', '15:00', '17:30', '23:00', true)
 ON CONFLICT (day_of_week) DO UPDATE SET
     open_time = EXCLUDED.open_time,
     close_time = EXCLUDED.close_time,
+    open_time2 = EXCLUDED.open_time2,
+    close_time2 = EXCLUDED.close_time2,
     is_open = EXCLUDED.is_open;
 
 -- Categorias do Cardápio
