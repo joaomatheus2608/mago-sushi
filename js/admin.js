@@ -4727,8 +4727,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     dom.settingStatusMode.value = s.store_status_mode || 'auto';
     dom.settingClosedMessage.value = s.closed_message || '';
     dom.settingMinOrder.value = s.min_order_value !== undefined ? s.min_order_value : 10.00;
-    dom.settingWhatsApp.value = s.whatsapp || '5581991421295';
-    dom.settingInstagram.value = s.instagram || '@magosushidelivery';
+    dom.settingWhatsApp.value = s.whatsapp || '5581973307123';
+    dom.settingInstagram.value = s.instagram || '@mago_sushidelivery';
     dom.settingAddress.value = s.address || '';
     dom.settingPixKey.value = s.pix_key || '';
   }

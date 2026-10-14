@@ -5,12 +5,12 @@
 const APP_CONFIG = {
   // Dados Oficiais
   RESTAURANT_NAME: 'Mago Sushi',
-  WHATSAPP_NUMBER: '5581991421295',
-  INSTAGRAM_HANDLE: '@magosushidelivery',
+  WHATSAPP_NUMBER: '5581973307123',
+  INSTAGRAM_HANDLE: '@mago_sushidelivery',
   DEFAULT_DELIVERY_FEE: 5.00,
   MIN_ORDER_VALUE: 20.00,
   PICKUP_ADDRESS: 'Delivery de Sushi Artesanal (Apenas Delivery)',
-  OPERATING_HOURS_DESC: 'Quarta a Domingo — 18:00 às 22:30 (Segunda e Terça fechado)'
+  OPERATING_HOURS_DESC: 'Quarta a Segunda — 17:30 às 23:00 (Terça fechado) • Sáb/Dom Almoço 11h às 15h'
 };
 
 // Exporta globalmente para o navegador

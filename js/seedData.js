@@ -7,13 +7,13 @@ const INITIAL_SETTINGS = {
   name: "Mago Sushi",
   slogan: "O melhor sushi delivery da regiao!",
   address: "Delivery de Sushi Artesanal",
-  whatsapp: "5581991421295",
-  instagram: "@magosushidelivery",
+  whatsapp: "5581973307123",
+  instagram: "@mago_sushidelivery",
   delivery_fee: 5.00,
   min_order_value: 20.00,
   store_status_mode: "auto",
   closed_message: "Estamos fechados no momento. Horário: Quarta a Segunda das 17:30 às 23:00 (Terça-feira fechado). Sábado e Domingo almoço das 11:00 às 15:00 e jantar das 17:30 às 23:00.",
-  pix_key: "5581991421295",
+  pix_key: "5581973307123",
   pix_type: "Telefone",
   pix_beneficiary: "Mago Sushi"
 };
