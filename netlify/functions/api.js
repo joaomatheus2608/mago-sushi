@@ -155,9 +155,14 @@ exports.handler = async function(event) {
         supabaseFetch('/neighborhoods?order=name').catch(() => []),
         supabaseFetch('/couriers?order=name').catch(() => [])
       ]);
+      let cleanSettings = Array.isArray(settingsData) ? settingsData[0] : settingsData;
+      if (cleanSettings) {
+        cleanSettings = { ...cleanSettings };
+        delete cleanSettings.admin_password_hash;
+      }
       return respond(200, {
         data: {
-          settings: Array.isArray(settingsData) ? settingsData[0] : settingsData,
+          settings: cleanSettings,
           hours: hoursData || [],
           categories: categories || [],
           products: products || [],
@@ -174,7 +179,45 @@ exports.handler = async function(event) {
     // -------------------------------------------------------
     if (method === 'GET' && path === 'get-settings') {
       const data = await supabaseFetch('/settings?limit=1');
-      return respond(200, { data: Array.isArray(data) ? data[0] : data });
+      let clean = Array.isArray(data) ? data[0] : data;
+      if (clean) {
+        clean = { ...clean };
+        delete clean.admin_password_hash;
+      }
+      return respond(200, { data: clean });
+    }
+
+    // -------------------------------------------------------
+    // ADMIN LOGIN (Autenticação 100% Server-side via Supabase)
+    // -------------------------------------------------------
+    if (method === 'POST' && path === 'admin-login') {
+      const inputPass = String(body.password || '').trim();
+      if (!inputPass) {
+        return respond(400, { success: false, error: 'Senha não informada.' });
+      }
+
+      const data = await supabaseFetch('/settings?select=admin_password_hash&limit=1');
+      const storeSettings = Array.isArray(data) ? data[0] : data;
+      const expectedPass = String(storeSettings?.admin_password_hash || '').trim();
+
+      if (!expectedPass) {
+        return respond(500, { success: false, error: 'Senha administrativa não encontrada no banco.' });
+      }
+
+      const saltedHash = await hashPassword(inputPass);
+      const rawHash = await hashPasswordRaw(inputPass);
+      const storedLower = expectedPass.toLowerCase();
+
+      const isValid = (inputPass === expectedPass) ||
+                      (rawHash.toLowerCase() === storedLower) ||
+                      (saltedHash.toLowerCase() === storedLower);
+
+      if (isValid) {
+        const token = `admin_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+        return respond(200, { success: true, token });
+      } else {
+        return respond(401, { success: false, error: 'Senha administrativa incorreta.' });
+      }
     }
 
     // -------------------------------------------------------
@@ -195,49 +238,6 @@ exports.handler = async function(event) {
           body: JSON.stringify(fields)
         });
         return respond(200, { data: Array.isArray(data) ? data[0] : data });
-      }
-    }
-
-    // -------------------------------------------------------
-    // ADMIN LOGIN
-    // -------------------------------------------------------
-    if (method === 'POST' && path === 'admin-login') {
-      const { password } = body;
-      if (!password) return respond(400, { error: 'Senha não informada.' });
-
-      // Tenta via RPC primeiro
-      try {
-        const rpcResult = await supabaseRpc('verify_admin_password', { input_password: password });
-        if (typeof rpcResult === 'boolean') {
-          if (rpcResult) {
-            return respond(200, { success: true });
-          } else {
-            return respond(401, { error: 'Senha incorreta.' });
-          }
-        }
-      } catch {}
-
-      // Fallback: verifica via coluna admin_password_hash na tabela settings
-      const settingsData = await supabaseFetch('/settings?limit=1');
-      const settings = Array.isArray(settingsData) ? settingsData[0] : settingsData;
-      const storedHash = settings?.admin_password_hash;
-
-      if (!storedHash) {
-        return respond(500, { error: 'Senha admin não configurada no banco de dados.' });
-      }
-
-      const saltedHash = await hashPassword(password);
-      const rawHash = await hashPasswordRaw(password);
-      const storedLower = String(storedHash).trim().toLowerCase();
-
-      const isValid = password === storedHash ||
-                      rawHash.toLowerCase() === storedLower ||
-                      saltedHash.toLowerCase() === storedLower;
-
-      if (isValid) {
-        return respond(200, { success: true });
-      } else {
-        return respond(401, { error: 'Senha incorreta.' });
       }
     }
 

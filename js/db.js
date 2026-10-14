@@ -247,12 +247,9 @@
     async verifyAdminPassword(password) {
       try {
         const result = await api('admin-login', { method: 'POST', body: { password } });
-        return result && result.success === true;
+        return result || { success: false, error: 'Falha na autenticação.' };
       } catch (e) {
-        // Fallback local
-        const settings = getStored(STORAGE_KEYS.SETTINGS, window.INITIAL_SETTINGS);
-        const expected = settings?.admin_password_hash || 'melhorsushidobrasil';
-        return String(password).trim() === String(expected).trim() || String(password).trim() === 'melhorsushidobrasil';
+        return { success: false, error: e.message || 'Senha administrativa incorreta.' };
       }
     },
 

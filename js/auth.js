@@ -82,26 +82,21 @@
     // ADMINISTRADOR
     // ----------------------------------------
     async loginAdmin(password) {
-      if (!password) {
+      if (!password || !password.trim()) {
         throw new Error('Informe a senha administrativa.');
       }
 
-      const settings = await window.db.getSettings();
-      const expectedPassword = settings?.admin_password_hash || 'melhorsushidobrasil';
-
-      const isValid = String(password).trim() === String(expectedPassword).trim() ||
-                      String(password).trim() === 'melhorsushidobrasil';
-
-      if (isValid) {
+      const res = await window.db.verifyAdminPassword(password.trim());
+      if (res && res.success) {
         const adminSession = {
           role: 'admin',
-          token: `admin_${Date.now()}`,
+          token: res.token || `admin_${Date.now()}`,
           logged_at: new Date().toISOString()
         };
         localStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify(adminSession));
         return adminSession;
       } else {
-        throw new Error('Senha administrativa incorreta.');
+        throw new Error(res?.error || 'Senha administrativa incorreta.');
       }
     },
 
