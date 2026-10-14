@@ -2369,7 +2369,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </head>
         <body>
           <div class="ticket-wrapper">
-            <h2>BOYDEGUSTA</h2>
+            <h2>MAGO SUSHI</h2>
             <h3>PEDIDO #${String(order.order_number).padStart(4, '0')}</h3>
             <div class="tipo">[ ${typeStr} ]</div>
             <div class="data">${new Date(order.created_at).toLocaleString('pt-BR')}</div>
@@ -4544,7 +4544,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </head>
         <body>
           <div class="ticket-wrapper">
-            <h2>BOYDEGUSTA</h2>
+            <h2>MAGO SUSHI</h2>
             <h3>ACERTO DE ENTREGADOR</h3>
             <div style="text-align: center; font-weight: 900; font-size: 16px; margin: 4px auto; padding: 3px; border: 2px solid #000; display: block;">🛵 ${window.escapeHtml(courierName.toUpperCase())}</div>
             <div style="text-align: center; font-size: 13px; font-weight: 900; margin: 2px 0;">Data: ${new Date(reportDate + 'T12:00:00').toLocaleDateString('pt-BR')}</div>
@@ -4667,7 +4667,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </head>
         <body>
           <div class="ticket-wrapper">
-            <h2>BOYDEGUSTA</h2>
+            <h2>MAGO SUSHI</h2>
             <h3>FECHAMENTO DE CAIXA DIÁRIO</h3>
             <div style="text-align: center; font-size: 13px; font-weight: 900;">Data: ${new Date(reportDate + 'T12:00:00').toLocaleDateString('pt-BR')}</div>
             <div style="text-align: center; font-size: 11px; color: #333; font-weight: bold;">Gerado em: ${new Date().toLocaleString('pt-BR')}</div>
