@@ -4,8 +4,16 @@
 // As credenciais NUNCA chegam ao browser.
 // ========================================================
 
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY;
+const rawUrl = process.env.SUPABASE_URL || '';
+const SUPABASE_URL = rawUrl.trim().replace(/\/+$/, '');
+const SUPABASE_KEY = (
+  process.env.SUPABASE_SERVICE_ROLE_KEY ||
+  process.env.SUPABASE_SERVICE_KEY ||
+  process.env.SUPABASE_ANON ||
+  process.env.SUPABASE_ANON_KEY ||
+  process.env.SUPABASE_KEY ||
+  ''
+).trim();
 
 function supabaseHeaders() {
   return {
@@ -122,7 +130,9 @@ exports.handler = async function(event) {
   }
 
   if (!SUPABASE_URL || !SUPABASE_KEY) {
-    return respond(500, { error: 'Variáveis de ambiente do servidor não configuradas.' });
+    return respond(500, {
+      error: 'Variáveis de ambiente do servidor não configuradas. Certifique-se de configurar SUPABASE_URL e SUPABASE_ANON no Netlify.'
+    });
   }
 
   const method = event.httpMethod;
