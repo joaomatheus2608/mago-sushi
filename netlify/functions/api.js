@@ -666,18 +666,12 @@ exports.handler = async function(event) {
       const { ids } = body;
       if (ids && Array.isArray(ids) && ids.length > 0) {
         try {
-          await supabaseFetch(`/order_items?order_id=in.(${ids.map(encodeURIComponent).join(',')})`, { method: 'DELETE' });
-        } catch {}
-        try {
           await supabaseFetch(`/orders?id=in.(${ids.map(encodeURIComponent).join(',')})`, { method: 'DELETE' });
         } catch (e) {
           console.warn('Erro ao deletar pedidos específicos:', e.message);
         }
       } else {
         // Deleta todos os pedidos
-        try {
-          await supabaseFetch('/order_items?id=not.is.null', { method: 'DELETE' });
-        } catch {}
         try {
           await supabaseFetch('/orders?id=not.is.null', { method: 'DELETE' });
         } catch (e1) {
@@ -690,6 +684,7 @@ exports.handler = async function(event) {
       }
       return respond(200, { success: true });
     }
+
 
     // -------------------------------------------------------
     // GET NEIGHBORHOODS

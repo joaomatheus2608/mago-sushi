@@ -172,11 +172,15 @@
 
       try {
         const base64Pure = compressedDataUrl.replace(/^data:image\/[a-z]+;base64,/, '');
-        const fileName = `prod_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.jpg`;
+        // Detecta o formato real resultante da compressão (WebP ou JPEG)
+        const isWebP = compressedDataUrl.startsWith('data:image/webp');
+        const ext = isWebP ? 'webp' : 'jpg';
+        const mimeType = isWebP ? 'image/webp' : 'image/jpeg';
+        const fileName = `prod_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${ext}`;
         const fnRes = await fetch('/.netlify/functions/api?action=upload-image', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ base64: base64Pure, fileName, mimeType: 'image/jpeg' })
+          body: JSON.stringify({ base64: base64Pure, fileName, mimeType })
         });
         if (fnRes.ok) {
           const fnJson = await fnRes.json();
@@ -189,6 +193,7 @@
       // Fallback: retorna base64 comprimida
       return compressedDataUrl;
     },
+
 
     // ----------------------------------------
     // 0. BOOTSTRAP UNIFICADO

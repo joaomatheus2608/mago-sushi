@@ -943,7 +943,7 @@
           <div class="form-cols-2">
             <div class="form-field-group">
               <label class="form-field-label">Preço (R$) - deixe vazio se a definir</label>
-              <input type="number" step="0.50" id="editProdPrice" class="form-text-input" placeholder="Ex: 28.00" />
+              <input type="number" step="0.01" id="editProdPrice" class="form-text-input" placeholder="Ex: 28.00" />
             </div>
             <div class="form-field-group">
               <label class="form-field-label">Disponibilidade</label>
@@ -981,15 +981,15 @@
             <div id="editProdSizesFields" style="display: none; grid-template-columns: repeat(3, 1fr); gap: 10px;">
               <div class="form-field-group" style="margin-bottom: 0;">
                 <label class="form-field-label">Preço P (R$)</label>
-                <input type="number" step="0.50" id="editProdPriceP" class="form-text-input" placeholder="Ex: 25.00" />
+                <input type="number" step="0.01" id="editProdPriceP" class="form-text-input" placeholder="Ex: 25.00" />
               </div>
               <div class="form-field-group" style="margin-bottom: 0;">
                 <label class="form-field-label">Preço M (R$)</label>
-                <input type="number" step="0.50" id="editProdPriceM" class="form-text-input" placeholder="Ex: 34.00" />
+                <input type="number" step="0.01" id="editProdPriceM" class="form-text-input" placeholder="Ex: 34.00" />
               </div>
               <div class="form-field-group" style="margin-bottom: 0;">
                 <label class="form-field-label">Preço G (R$)</label>
-                <input type="number" step="0.50" id="editProdPriceG" class="form-text-input" placeholder="Ex: 44.00" />
+                <input type="number" step="0.01" id="editProdPriceG" class="form-text-input" placeholder="Ex: 44.00" />
               </div>
             </div>
           </div>
@@ -1008,7 +1008,7 @@
               <div class="form-cols-2">
                 <div class="form-field-group">
                   <label class="form-field-label">Preço Promocional (R$) *</label>
-                  <input type="number" step="0.50" id="editProdPromoPrice" class="form-text-input" placeholder="Ex: 40.00" />
+                  <input type="number" step="0.01" id="editProdPromoPrice" class="form-text-input" placeholder="Ex: 40.00" />
                 </div>
                 <div class="form-field-group">
                   <label class="form-field-label">Rótulo / Badge (Opcional)</label>
@@ -1111,7 +1111,7 @@
           <div class="form-cols-2">
             <div class="form-field-group">
               <label class="form-field-label">Preço Adicional (R$) *</label>
-              <input type="number" step="0.50" id="editOptPrice" class="form-text-input" placeholder="Ex: 4.00" required />
+              <input type="number" step="0.01" id="editOptPrice" class="form-text-input" placeholder="Ex: 4.00" required />
             </div>
             <div class="form-field-group">
               <label class="form-field-label">Status</label>
@@ -1177,11 +1177,11 @@
             <div class="form-cols-2">
               <div class="form-field-group">
                 <label class="form-field-label">Preço Normal (R$) *</label>
-                <input type="number" step="0.50" id="dayPromoRegularPrice" class="form-text-input" placeholder="Ex: 50.00" />
+                <input type="number" step="0.01" id="dayPromoRegularPrice" class="form-text-input" placeholder="Ex: 50.00" />
               </div>
               <div class="form-field-group">
                 <label class="form-field-label">Preço Promocional (R$) *</label>
-                <input type="number" step="0.50" id="dayPromoPrice" class="form-text-input" placeholder="Ex: 40.00" />
+                <input type="number" step="0.01" id="dayPromoPrice" class="form-text-input" placeholder="Ex: 40.00" />
               </div>
             </div>
           </div>
@@ -1193,29 +1193,29 @@
               <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
                 <div class="form-field-group" style="margin: 0;">
                   <label class="form-field-label" style="font-size: 0.75rem;">Preço P Normal</label>
-                  <input type="number" step="0.50" id="dayPromoRegularPriceP" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem;" />
+                  <input type="number" step="0.01" id="dayPromoRegularPriceP" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem;" />
                 </div>
                 <div class="form-field-group" style="margin: 0;">
                   <label class="form-field-label" style="font-size: 0.75rem;">Preço M Normal</label>
-                  <input type="number" step="0.50" id="dayPromoRegularPriceM" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem;" />
+                  <input type="number" step="0.01" id="dayPromoRegularPriceM" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem;" />
                 </div>
                 <div class="form-field-group" style="margin: 0;">
                   <label class="form-field-label" style="font-size: 0.75rem;">Preço G Normal</label>
-                  <input type="number" step="0.50" id="dayPromoRegularPriceG" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem;" />
+                  <input type="number" step="0.01" id="dayPromoRegularPriceG" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem;" />
                 </div>
               </div>
               <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px;">
                 <div class="form-field-group" style="margin: 0;">
                   <label class="form-field-label" style="font-size: 0.75rem; color: #d97706;">Promo P (R$) *</label>
-                  <input type="number" step="0.50" id="dayPromoPriceP" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem; border-color: #f59e0b;" />
+                  <input type="number" step="0.01" id="dayPromoPriceP" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem; border-color: #f59e0b;" />
                 </div>
                 <div class="form-field-group" style="margin: 0;">
                   <label class="form-field-label" style="font-size: 0.75rem; color: #d97706;">Promo M (R$) *</label>
-                  <input type="number" step="0.50" id="dayPromoPriceM" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem; border-color: #f59e0b;" />
+                  <input type="number" step="0.01" id="dayPromoPriceM" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem; border-color: #f59e0b;" />
                 </div>
                 <div class="form-field-group" style="margin: 0;">
                   <label class="form-field-label" style="font-size: 0.75rem; color: #d97706;">Promo G (R$) *</label>
-                  <input type="number" step="0.50" id="dayPromoPriceG" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem; border-color: #f59e0b;" />
+                  <input type="number" step="0.01" id="dayPromoPriceG" class="form-text-input" placeholder="0.00" style="font-size: 0.85rem; border-color: #f59e0b;" />
                 </div>
               </div>
             </div>
@@ -1386,7 +1386,7 @@
         <div class="form-cols-2" style="margin-bottom: 12px;">
           <div class="form-field-group" style="margin-bottom: 0;">
             <label class="form-field-label">Taxa de Entrega (R$)</label>
-            <input type="number" step="0.50" id="waDeliveryFee" class="form-text-input" value="5.00" />
+            <input type="number" step="0.01" id="waDeliveryFee" class="form-text-input" value="5.00" />
           </div>
           <div class="form-field-group" style="margin-bottom: 0;">
             <label class="form-field-label">Forma de Pagamento</label>
@@ -1536,7 +1536,7 @@
           <div class="form-cols-2">
             <div class="form-field-group">
               <label class="form-field-label">Taxa de Entrega (R$) *</label>
-              <input type="number" step="0.50" id="editNeighborhoodFee" class="form-text-input" placeholder="Ex: 8.00"
+              <input type="number" step="0.01" id="editNeighborhoodFee" class="form-text-input" placeholder="Ex: 8.00"
                 required />
             </div>
             <div class="form-field-group">
@@ -1610,11 +1610,11 @@
         <div class="form-cols-2" style="margin-bottom: 12px;">
           <div class="form-field-group" style="margin-bottom: 0;">
             <label class="form-field-label">Fundo de Troco Inicial (R$)</label>
-            <input type="number" step="0.50" id="closeModalInitialFund" class="form-text-input" value="0.00" />
+            <input type="number" step="0.01" id="closeModalInitialFund" class="form-text-input" value="0.00" />
           </div>
           <div class="form-field-group" style="margin-bottom: 0;">
             <label class="form-field-label">Dinheiro Contado na Gaveta (R$)</label>
-            <input type="number" step="0.50" id="closeModalCountedCash" class="form-text-input"
+            <input type="number" step="0.01" id="closeModalCountedCash" class="form-text-input"
               placeholder="Ex: 250.00" />
           </div>
         </div>

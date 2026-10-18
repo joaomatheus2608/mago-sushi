@@ -2864,7 +2864,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function compressImageFile(file, maxWidth = 400, maxHeight = 400, quality = 0.75) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const img = new Image();
@@ -2889,13 +2889,17 @@ document.addEventListener('DOMContentLoaded', async () => {
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
 
-          const dataUrl = canvas.toDataURL('image/jpeg', quality);
+          // Tenta WebP primeiro (menor tamanho), depois JPEG como fallback
+          let dataUrl = canvas.toDataURL('image/webp', quality);
+          if (!dataUrl || !dataUrl.startsWith('data:image/webp')) {
+            dataUrl = canvas.toDataURL('image/jpeg', quality);
+          }
           resolve(dataUrl);
         };
-        img.onerror = () => reject(new Error('Erro ao ler a imagem.'));
+        img.onerror = () => resolve(e.target.result || null); // fallback sem crash
         img.src = e.target.result;
       };
-      reader.onerror = () => reject(new Error('Erro ao carregar o arquivo.'));
+      reader.onerror = () => resolve(null); // fallback sem crash
       reader.readAsDataURL(file);
     });
   }
@@ -3248,6 +3252,20 @@ document.addEventListener('DOMContentLoaded', async () => {
       const is_active = dom.editCatActive.value === 'true';
 
       if (!name) return;
+
+      // Verifica se já existe outra categoria na posição desejada
+      const conflict = adminState.categories.some(c => c.id !== id && Number(c.order_index) === order_index);
+      if (conflict) {
+        // Empurra todas as categorias com order_index >= nova posição (exceto a atual) +1
+        const toShift = adminState.categories.filter(c => c.id !== id && Number(c.order_index) >= order_index);
+        for (const cat of toShift) {
+          const updated = { ...cat, order_index: Number(cat.order_index) + 1 };
+          await window.db.saveCategory(updated);
+          const idx = adminState.categories.findIndex(c => c.id === cat.id);
+          if (idx >= 0) adminState.categories[idx] = updated;
+        }
+      }
+
       const payload = { name, order_index, is_active };
       if (id) payload.id = id;
 
@@ -5492,12 +5510,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // Atualização automática a cada 1 minuto (60 segundos) sem travar
+  // Atualização automática a cada 60 segundos para reduzir consumo do Supabase
   setInterval(async () => {
     if (window.auth.isAdminLoggedIn()) {
       await syncOrdersQuietly();
     }
-  }, 30000); // Polling a cada 30 segundos
+  }, 60000); // Polling a cada 60 segundos
 
   // Sincroniza imediatamente ao retornar ou focar na aba
   document.addEventListener('visibilitychange', async () => {
